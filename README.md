@@ -1,8 +1,13 @@
-# Cadastro de Funcionário
+# Sistema Cadastro de Funcionário
+## Integração com o backend
+- Para a comunicação com o backend usar o projeto [GitHub - angelozero/backend](https://github.com/angelozero/backend)
 
+- Para execução da API acessar [README.md](https://github.com/angelozero/backend/blob/main/README.md) 
 
-A sistema de Cadastro de Funcionários permite operações básicas de criação, atualização, listagem e exclusão de funcionários associados a um departamentos específico.
- 
+## Info Cadastro de Funcionário
+
+O sistema de Cadastro de Funcionários permite operações básicas de criação, atualização, listagem e exclusão de funcionários associados a um departamentos específico.
+
 Cada funcionário é identificado por um nome, e-mail e está vinculado a um departamento.
 
 Os principais recursos incluem:
