@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cadastro de Funcionários</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+</head>
+
+<body>
+    <div class="container">
+        <div class="form-container">
+            <h2>Cadastrar um funcionário</h2>
+            <div class="form-group">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome">
+            </div>
+            <div class="form-group">
+                <label for="sobrenome">Sobrenome:</label>
+                <input type="text" id="sobrenome" name="sobrenome">
+            </div>
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email">
+            </div>
+            <div class="form-group">
+                <label for="departamento">Departamento:</label>
+                <select id="departamento" name="departamento">
+                    <!-- Departamentos serão preenchidos dinamicamente -->
+                </select>
+            </div>
+            <div class="button-container">
+                <button id="cadastrar-btn">Cadastrar</button>
+            </div>
+        </div>
+        <div class="list-container">
+            <h2>Lista de Funcionários</h2>
+            <div class="filter-container">
+                <input type="text" id="filtro-nome" placeholder="Filtrar por Nome">
+                <input type="text" id="filtro-email" placeholder="Filtrar por Email">
+                <input type="text" id="filtro-departamento" placeholder="Filtrar por Departamento">
+            </div>
+            <div class="list-item">
+                <div><strong>ID</strong></div>
+                <div><strong>Nome</strong></div>
+                <div><strong>Email</strong></div>
+                <div><strong>Departamento</strong></div>
+                <div><strong>Ações</strong></div> <!-- Nova coluna sem título -->
+            </div>
+            <div id="funcionarios-list">
+                <!-- Itens da lista serão preenchidos dinamicamente aqui -->
+            </div>
+            <div class="pagination-container">
+                <button id="anterior-btn" disabled>Anterior</button>
+                <div id="pagination-text">Página 1 de 1</div>
+                <button id="proximo-btn" disabled>Próximo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-up para exibir mensagens -->
+    <div id="popup" class="popup"></div>
+
+    <!-- Janela de Edição -->
+    <div id="edit-window" class="edit-window">
+        <h2>Editar Funcionário</h2>
+        <div class="form-group">
+            <label for="nome-edit">Nome:</label>
+            <input type="text" id="nome-edit" name="nome">
+        </div>
+        <div class="form-group">
+            <label for="sobrenome-edit">Sobrenome:</label>
+            <input type="text" id="sobrenome-edit" name="sobrenome">
+        </div>
+        <div class="form-group">
+            <label for="email-edit">Email:</label>
+            <input type="text" id="email-edit" name="email">
+        </div>
+        <div class="form-group">
+            <label for="departamento-edit">Departamento:</label>
+            <select id="departamento-edit" name="departamento">
+                <!-- Departamentos serão preenchidos dinamicamente -->
+            </select>
+        </div>
+        <div class="button-container">
+            <button id="editar-btn">Editar</button>
+            <button id="voltar-btn">Voltar</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    
+</body>
+
+</html>
