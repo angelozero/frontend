@@ -21,7 +21,7 @@ function carregarFuncionarios(page, total, departamento, nome, email) {
         .then(data => {
             // Preencher a lista de funcionários
             const funcionariosList = document.getElementById('funcionarios-list');
-            funcionariosList.innerHTML = ''; // Limpar a lista antes de preencher
+            funcionariosList.innerHTML = '';
 
             data.results.forEach(funcionario => {
                 const listItem = document.createElement('div');
@@ -94,7 +94,7 @@ function carregarDepartamentos() {
 
 // Função para abrir a janela de edição do funcionário
 function abrirJanelaEdicao(id) {
-    currentEditingId = id; // Armazenar o ID do funcionário sendo editado
+    currentEditingId = id;
     const editWindow = document.getElementById('edit-window');
     editWindow.style.display = 'block';
 
@@ -105,6 +105,12 @@ function abrirJanelaEdicao(id) {
             document.getElementById('nome-edit').value = data.name;
             document.getElementById('sobrenome-edit').value = data.second_name;
             document.getElementById('email-edit').value = data.email;
+            document.getElementById('zipcode-edit').value = data.address.zipcode;
+            document.getElementById('street-edit').value = data.address.street;
+            document.getElementById('number-edit').value = data.address.number;
+            document.getElementById('neighbourhood-edit').value = data.address.neighbourhood;
+            document.getElementById('city-edit').value = data.address.city;
+            document.getElementById('uf-edit').value = data.address.uf;
 
             // Obter o ID do departamento vinculado ao funcionário
             const departamentoVinculadoId = data.department.id;
@@ -114,7 +120,8 @@ function abrirJanelaEdicao(id) {
                 .then(response => response.json())
                 .then(departamentos => {
                     const departamentoEditSelect = document.getElementById('departamento-edit');
-                    departamentoEditSelect.innerHTML = ''; // Limpar dropdown antes de preencher
+                    // Limpar dropdown antes de preencher
+                    departamentoEditSelect.innerHTML = '';
 
                     departamentos.forEach(departamento => {
                         const option = document.createElement('option');
@@ -189,6 +196,12 @@ function cadastrarFuncionario() {
     const sobrenome = document.getElementById('sobrenome').value;
     const email = document.getElementById('email').value;
     const departamentoSelecionado = document.getElementById('departamento').value;
+    const cep = document.getElementById('cep').value;
+    const rua = document.getElementById('rua').value;
+    const numero = document.getElementById('numero').value;
+    const bairro = document.getElementById('bairro').value;
+    const cidade = document.getElementById('cidade').value;
+    const uf = document.getElementById('uf').value;
 
     // Extrair apenas o nome do departamento
     const nomeDepartamento = parseInt(departamentoSelecionado.split(' ')[0]);
@@ -347,3 +360,65 @@ document.getElementById('anterior-btn').addEventListener('click', () => {
 document.getElementById('proximo-btn').addEventListener('click', () => {
     carregarFuncionarios(currentPage + 1, 10, '', '', '');
 });
+
+
+// Funcionalidades para CEP
+function limpa_formulário_cep() {
+    // Limpa valores do formulário de cep.
+    $("#rua").val("");
+    $("#bairro").val("");
+    $("#cidade").val("");
+    $("#uf").val("");
+}
+
+//Quando o campo cep perde o foco.
+$("#cep").blur(function () {
+
+    //Nova variável "cep" somente com dígitos.
+    var cep = $(this).val().replace(/\D/g, '');
+
+    //Verifica se campo cep possui valor informado.
+    if (cep != "") {
+
+        //Expressão regular para validar o CEP.
+        var validacep = /^[0-9]{8}$/;
+
+        //Valida o formato do CEP.
+        if (validacep.test(cep)) {
+
+            //Preenche os campos com "..." enquanto consulta webservice.
+            $("#rua").val("...");
+            $("#bairro").val("...");
+            $("#cidade").val("...");
+            $("#uf").val("...");
+
+            //Consulta o webservice viacep.com.br/
+            $.getJSON("https://viacep.com.br/ws/" + cep + "/json/?callback=?", function (dados) {
+
+                if (!("erro" in dados)) {
+                    //Atualiza os campos com os valores da consulta.
+                    $("#rua").val(dados.logradouro);
+                    $("#bairro").val(dados.bairro);
+                    $("#cidade").val(dados.localidade);
+                    $("#uf").val(dados.uf);
+                } //end if.
+                else {
+                    //CEP pesquisado não foi encontrado.
+                    limpa_formulário_cep();
+                    alert("CEP não encontrado.");
+                }
+            });
+        } //end if.
+        else {
+            //cep é inválido.
+            limpa_formulário_cep();
+            alert("Formato de CEP inválido.");
+        }
+    } //end if.
+    else {
+        //cep sem valor, limpa formulário.
+        limpa_formulário_cep();
+    }
+});
+
+
