@@ -105,11 +105,11 @@ function abrirJanelaEdicao(id) {
             document.getElementById('nome-edit').value = data.name;
             document.getElementById('sobrenome-edit').value = data.second_name;
             document.getElementById('email-edit').value = data.email;
-            document.getElementById('zipcode-edit').value = data.address.zipcode;
-            document.getElementById('street-edit').value = data.address.street;
-            document.getElementById('number-edit').value = data.address.number;
-            document.getElementById('neighbourhood-edit').value = data.address.neighbourhood;
-            document.getElementById('city-edit').value = data.address.city;
+            document.getElementById('cep-edit').value = data.address.zipcode;
+            document.getElementById('rua-edit').value = data.address.street;
+            document.getElementById('numero-edit').value = data.address.number;
+            document.getElementById('bairro-edit').value = data.address.neighbourhood;
+            document.getElementById('cidade-edit').value = data.address.city;
             document.getElementById('uf-edit').value = data.address.uf;
 
             // Obter o ID do departamento vinculado ao funcionário
@@ -215,7 +215,15 @@ function cadastrarFuncionario() {
             department_id: nomeDepartamento, // Enviar apenas o nome do departamento
             email: email,
             name: nome,
-            second_name: sobrenome
+            second_name: sobrenome,
+            address: {
+                zipcode: cep,
+                street: rua,
+                number: numero,
+                neighbourhood: bairro,
+                city: cidade,
+                uf: uf
+            }
         })
     })
         .then(response => {
@@ -229,6 +237,12 @@ function cadastrarFuncionario() {
             document.getElementById('sobrenome').value = '';
             document.getElementById('email').value = '';
             document.getElementById('departamento').value = '';
+            document.getElementById('cep').value = '';
+            document.getElementById('rua').value = '';
+            document.getElementById('numero').value = '';
+            document.getElementById('bairro').value = '';
+            document.getElementById('cidade').value = '';
+            document.getElementById('uf').value = '';
             // Recarregar a lista após o cadastro
             carregarFuncionarios(currentPage, 10, '', '', '');
         })
@@ -308,6 +322,12 @@ document.getElementById('editar-btn').addEventListener('click', () => {
     const sobrenome = document.getElementById('sobrenome-edit').value;
     const email = document.getElementById('email-edit').value;
     const departamento = document.getElementById('departamento-edit').value;
+    const cep = document.getElementById('cep-edit').value;
+    const rua = document.getElementById('rua-edit').value;
+    const numero = document.getElementById('numero-edit').value;
+    const bairro = document.getElementById('bairro-edit').value;
+    const cidade = document.getElementById('cidade-edit').value;
+    const uf = document.getElementById('uf-edit').value;
 
     // Extrai apenas o número do departamento
     const departamentoNumero = parseInt(departamento.split(' ')[0]);
@@ -321,7 +341,15 @@ document.getElementById('editar-btn').addEventListener('click', () => {
             department_id: departamentoNumero,
             email: email,
             name: nome,
-            second_name: sobrenome
+            second_name: sobrenome,
+            address: {
+                zipcode: cep,
+                street: rua,
+                number: numero,
+                neighbourhood: bairro,
+                city: cidade,
+                uf: uf
+            }
         })
     })
         .then(response => {

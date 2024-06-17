@@ -58,7 +58,7 @@ $(document).ready(function() {
         }
     });
 
-    $("#zipcode-edit").blur(function() {
+    $("#cep-edit").blur(function() {
 
         var cep = $(this).val().replace(/\D/g, '');
 
@@ -69,9 +69,9 @@ $(document).ready(function() {
             if(validacep.test(cep)) {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
-                $("#street-edit").val("...");
-                $("#neighbourhood-edit").val("...");
-                $("#city-edit").val("...");
+                $("#rua-edit").val("...");
+                $("#bairro-edit").val("...");
+                $("#cidade-edit").val("...");
                 $("#uf-edit").val("...");
 
                 //Consulta o webservice viacep.com.br/
@@ -79,9 +79,9 @@ $(document).ready(function() {
 
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
-                        $("#street-edit").val(dados.logradouro);
-                        $("#neighbourhood-edit").val(dados.bairro);
-                        $("#city-edit").val(dados.localidade);
+                        $("#rua-edit").val(dados.logradouro);
+                        $("#bairro-edit").val(dados.bairro);
+                        $("#cidade-edit").val(dados.localidade);
                         $("#uf-edit").val(dados.uf);
                     } //end if.
                     else {
