@@ -1,0 +1,44 @@
+#    M1 MacBook Pro
+#    Sonoma Version 14.3 (23D56)
+#    Docker 4.28.0 (139021)
+#    - export DOCKER_DEFAULT_PLATFORM=linux/amd64
+#    - docker-compose up -d
+version: "3.8"
+
+services:
+  employee_app:
+    platform: linux/x86_64
+    container_name: employee_backend
+    image: angelozero/py-backend
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      - DB_URL=postgresql://postgres:postgres@employee_db:5432/postgres
+    depends_on:
+      - employee_db
+    
+  employee_db:
+    platform: linux/amd64
+    container_name: employee_database
+    image: postgres:14.1-alpine3.15
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=postgres
+    volumes:
+      - employee_db_data:/var/lib/postgresql/data
+
+  employee_web:
+    platform: linux/amd64
+    container_name: employee_web_service
+    image: angelozero/cadastro-funcionario-app
+    ports:
+      - "80:80"
+    depends_on:
+      - employee_app
+
+volumes:
+  employee_db_data: {}
