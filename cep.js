@@ -3,6 +3,7 @@ $(document).ready(function() {
     function limpa_formulario_cep() {
         // Limpa valores do formulario de cep.
         $("#rua").val("");
+        $("#complemento").val("");
         $("#bairro").val("");
         $("#cidade").val("");
         $("#uf").val("");
@@ -25,6 +26,7 @@ $(document).ready(function() {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
                 $("#rua").val("...");
+                $("#complemento").val("...");
                 $("#bairro").val("...");
                 $("#cidade").val("...");
                 $("#uf").val("...");
@@ -35,6 +37,7 @@ $(document).ready(function() {
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
                         $("#rua").val(dados.logradouro);
+                        $("#complemento").val(dados.complemento);
                         $("#bairro").val(dados.bairro);
                         $("#cidade").val(dados.localidade);
                         $("#uf").val(dados.uf);
@@ -70,6 +73,7 @@ $(document).ready(function() {
 
                 //Preenche os campos com "..." enquanto consulta webservice.
                 $("#rua-edit").val("...");
+                $("#complemento-edit").val("...");
                 $("#bairro-edit").val("...");
                 $("#cidade-edit").val("...");
                 $("#uf-edit").val("...");
@@ -80,6 +84,7 @@ $(document).ready(function() {
                     if (!("erro" in dados)) {
                         //Atualiza os campos com os valores da consulta.
                         $("#rua-edit").val(dados.logradouro);
+                        $("#complemento-edit").val(dados.complemento);
                         $("#bairro-edit").val(dados.bairro);
                         $("#cidade-edit").val(dados.localidade);
                         $("#uf-edit").val(dados.uf);

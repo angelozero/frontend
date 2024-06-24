@@ -14,7 +14,7 @@ function exibirPopup(message, success) {
 
 // Função para carregar os funcionários e informações de paginação
 function carregarFuncionarios(page, total, departamento, nome, email) {
-    const url = `http://127.0.0.1:8080/funcionarios?pagina=${page}&total=${total}&departamento=${departamento}&nome=${nome}&email=${email}`;
+    const url = `http://127.0.0.1:8080/api/funcionarios?pagina=${page}&total=${total}&departamento=${departamento}&nome=${nome}&email=${email}`;
 
     fetch(url)
         .then(response => response.json())
@@ -67,7 +67,7 @@ function carregarFuncionarios(page, total, departamento, nome, email) {
 
 // Função para carregar os departamentos
 function carregarDepartamentos() {
-    fetch('http://127.0.0.1:8080/departamentos')
+    fetch('http://127.0.0.1:8080/api/departamentos')
         .then(response => response.json())
         .then(data => {
             const departamentoSelect = document.getElementById('departamento');
@@ -99,7 +99,7 @@ function abrirJanelaEdicao(id) {
     editWindow.style.display = 'block';
 
     // Carregar dados do funcionário para edição
-    fetch(`http://127.0.0.1:8080/funcionario/${id}`)
+    fetch(`http://127.0.0.1:8080/api/funcionario/${id}`)
         .then(response => response.json())
         .then(data => {
             document.getElementById('nome-edit').value = data.name;
@@ -107,8 +107,9 @@ function abrirJanelaEdicao(id) {
             document.getElementById('email-edit').value = data.email;
             document.getElementById('cep-edit').value = data.address.zipcode;
             document.getElementById('rua-edit').value = data.address.street;
+            document.getElementById('complemento-edit').value = data.address.complement;
             document.getElementById('numero-edit').value = data.address.number;
-            document.getElementById('bairro-edit').value = data.address.neighbourhood;
+            document.getElementById('bairro-edit').value = data.address.neighborhood;
             document.getElementById('cidade-edit').value = data.address.city;
             document.getElementById('uf-edit').value = data.address.uf;
 
@@ -116,7 +117,7 @@ function abrirJanelaEdicao(id) {
             const departamentoVinculadoId = data.department.id;
 
             // Preencher dropdown do departamento com todos os departamentos
-            fetch(`http://127.0.0.1:8080/departamentos`)
+            fetch(`http://127.0.0.1:8080/api/departamentos`)
                 .then(response => response.json())
                 .then(departamentos => {
                     const departamentoEditSelect = document.getElementById('departamento-edit');
@@ -146,7 +147,7 @@ function abrirJanelaEdicao(id) {
 
 // Função para deletar um funcionário
 function deletarFuncionario(id) {
-    fetch(`http://127.0.0.1:8080/funcionario/${id}`, {
+    fetch(`http://127.0.0.1:8080/api/funcionario/${id}`, {
         method: 'DELETE',
     })
         .then(response => {
@@ -165,7 +166,7 @@ function deletarFuncionario(id) {
 
 // Função para verificar se existem itens ou páginas a serem exibidos após a exclusão do último registro
 function verificarItensEPaginas(page, total, departamento, nome, email) {
-    fetch(`http://127.0.0.1:8080/funcionarios?pagina=${page}&total=${total}&departamento=${departamento}&nome=${nome}&email=${email}`)
+    fetch(`http://127.0.0.1:8080/api/funcionarios?pagina=${page}&total=${total}&departamento=${departamento}&nome=${nome}&email=${email}`)
         .then(response => response.json())
         .then(data => {
             const anteriorBtn = document.getElementById('anterior-btn');
@@ -198,6 +199,7 @@ function cadastrarFuncionario() {
     const departamentoSelecionado = document.getElementById('departamento').value;
     const cep = document.getElementById('cep').value;
     const rua = document.getElementById('rua').value;
+    const complemento = document.getElementById('complemento').value;
     const numero = document.getElementById('numero').value;
     const bairro = document.getElementById('bairro').value;
     const cidade = document.getElementById('cidade').value;
@@ -206,7 +208,7 @@ function cadastrarFuncionario() {
     // Extrair apenas o nome do departamento
     const nomeDepartamento = parseInt(departamentoSelecionado.split(' ')[0]);
 
-    fetch('http://127.0.0.1:8080/funcionario', {
+    fetch('http://127.0.0.1:8080/api/funcionario', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -219,8 +221,9 @@ function cadastrarFuncionario() {
             address: {
                 zipcode: cep,
                 street: rua,
+                complement: complemento,
                 number: numero,
-                neighbourhood: bairro,
+                neighborhood: bairro,
                 city: cidade,
                 uf: uf
             }
@@ -239,6 +242,7 @@ function cadastrarFuncionario() {
             document.getElementById('departamento').value = '';
             document.getElementById('cep').value = '';
             document.getElementById('rua').value = '';
+            document.getElementById('complemento').value = '';
             document.getElementById('numero').value = '';
             document.getElementById('bairro').value = '';
             document.getElementById('cidade').value = '';
@@ -324,6 +328,7 @@ document.getElementById('editar-btn').addEventListener('click', () => {
     const departamento = document.getElementById('departamento-edit').value;
     const cep = document.getElementById('cep-edit').value;
     const rua = document.getElementById('rua-edit').value;
+    const complemento = document.getElementById('complemento-edit').value;
     const numero = document.getElementById('numero-edit').value;
     const bairro = document.getElementById('bairro-edit').value;
     const cidade = document.getElementById('cidade-edit').value;
@@ -332,7 +337,7 @@ document.getElementById('editar-btn').addEventListener('click', () => {
     // Extrai apenas o número do departamento
     const departamentoNumero = parseInt(departamento.split(' ')[0]);
 
-    fetch(`http://127.0.0.1:8080/funcionario/${id}`, {
+    fetch(`http://127.0.0.1:8080/api/funcionario/${id}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -345,8 +350,9 @@ document.getElementById('editar-btn').addEventListener('click', () => {
             address: {
                 zipcode: cep,
                 street: rua,
+                complement: complemento,
                 number: numero,
-                neighbourhood: bairro,
+                neighborhood: bairro,
                 city: cidade,
                 uf: uf
             }
@@ -394,6 +400,7 @@ document.getElementById('proximo-btn').addEventListener('click', () => {
 function limpa_formulário_cep() {
     // Limpa valores do formulário de cep.
     $("#rua").val("");
+    $("#complemento").val("");
     $("#bairro").val("");
     $("#cidade").val("");
     $("#uf").val("");
@@ -416,6 +423,7 @@ $("#cep").blur(function () {
 
             //Preenche os campos com "..." enquanto consulta webservice.
             $("#rua").val("...");
+            $("#complemento").val("...");
             $("#bairro").val("...");
             $("#cidade").val("...");
             $("#uf").val("...");
@@ -426,6 +434,7 @@ $("#cep").blur(function () {
                 if (!("erro" in dados)) {
                     //Atualiza os campos com os valores da consulta.
                     $("#rua").val(dados.logradouro);
+                    $("#complemento").val(dados.complemento);
                     $("#bairro").val(dados.bairro);
                     $("#cidade").val(dados.localidade);
                     $("#uf").val(dados.uf);
