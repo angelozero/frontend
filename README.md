@@ -68,4 +68,4 @@ Imagens do sistema:
 |Funcionario     |PUT         |/api/funcionario/{id}   | Atualiza um funcionário existente|
 |Funcionario     |GET         |/api/funcionarios       | Listando funcionários|
 |Departamento    |GET         |/api/departamentos      | Lista todos os departamentos|
-|CEPT            |GET         |/viacep.com.br/ws/{CEP}/json/ | Consulta do cep|
+|CEP            |GET         |/viacep.com.br/ws/{CEP}/json/ | Consulta do cep|
