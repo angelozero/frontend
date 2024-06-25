@@ -6,6 +6,10 @@
     - A imagem Docker se encontra no [DockerHub](https://hub.docker.com/repository/docker/angelozero/cadastro-funcionario-app/general) ou no arquivo [Dockerfile](https://github.com/angelozero/frontend/blob/main/Dockerfile) da aplicação.
     - Acessar a rota `localhost` direto no navegaor.
 - ### Via Docker Compose
+    - **O arquivo ja contempla**:
+        - Banco de Dados
+        - Aplicação Backend
+        - Aplicação Frontend
     - Acessar o arquivo [docker-compose.yml](https://github.com/angelozero/frontend/blob/main/docker-compose.yaml)
     - *Para sistemas operacionais MacOs execute o  seguinte comando antes de subir o container*
         ```shell
