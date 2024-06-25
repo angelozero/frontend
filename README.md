@@ -23,17 +23,9 @@
 
 ## Integração API ViaCEP
 - A api [ViaCEP](viacep.com.br/ws/13063000/json/) é uma api externa que suporta as seguintes funções:
-    - Modo geral: Retorna dados de endereço de acordo com o cep informado
-    - Frontend:
-        - Serviço utilizado para validação do cep e auto preenchimento dos demais campos referente ao endereço do funcionário
-    - Backend:
-        - Serviço utilizado para validação do cep e auto preenchimento do campos
-            - UF
-            - Cidade
-            - Estado
-        - Serviço utilizado para validar fluxos:
-            - POST: Criação de um funcionário vinculado a um endereço
-            - PUT: Alteração de um funcionário vinculado a um endereço
+    - Retorna dados de endereço de acordo com o cep informado
+    - Serviço utilizado para validação do cep e auto preenchimento dos demais campos referente ao endereço do funcionário
+    
 
 ## Integração com o backend
 - Para a comunicação com o backend usar o projeto [GitHub - angelozero/backend](https://github.com/angelozero/backend)
