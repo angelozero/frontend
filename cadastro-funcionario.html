@@ -2,12 +2,10 @@
 <html lang="pt-br">
 
 <head>
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Cadastro de Funcionários</title>
-        <link rel="stylesheet" href="styles.css">
-    </head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Funcionários</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
@@ -86,6 +84,83 @@
                 <div id="pagination-text">Página 1 de 1</div>
                 <button id="proximo-btn" disabled>Próximo</button>
             </div>
+            <br>
+            <br>
+            <div class="container">
+                <div class="form-container">
+                    <h1>Predição de Satisfação de Funcionários</h1>
+                    <form id="predictionForm">
+
+                        <div class="form-group">
+                            <label for="satisfaction_level">Satisfação:</label>
+                            <input type="number" id="satisfaction_level" name="satisfaction_level" required step="0.01"
+                                min="0.0" max="1.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="last_evaluation">Última Avaliação:</label>
+                            <input type="number" id="last_evaluation" name="last_evaluation" required step="0.01"
+                                min="0.0" max="1.0">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="number_project">Número de Projetos:</label>
+                            <input type="number" id="number_project" name="number_project" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="average_montly_hours">Horas Mensais Médias:</label>
+                            <input type="number" id="average_montly_hours" name="average_montly_hours" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="time_spend_company">Tempo na Empresa:</label>
+                            <input type="number" id="time_spend_company" name="time_spend_company" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="work_accident">Acidente de Trabalho:</label>
+                            <input type="number" id="work_accident" name="work_accident" required min="0" max="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="promotion_last_5years">Promoção nos últimos 5 anos:</label>
+                            <input type="number" id="promotion_last_5years" name="promotion_last_5years" required
+                                min="0" max="1">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dept">Departamento:</label>
+                            <select id="dept" name="dept">
+                                <option value="sales">Sales</option>
+                                <option value="accounting">Accounting</option>
+                                <option value="hr">HR</option>
+                                <option value="it">IT</option>
+                                <option value="marketing">Marketing</option>
+                                <option value="product_mng">Product Mng</option>
+                                <option value="sales">Sales</option>
+                                <option value="support">Support</option>
+                                <option value="technical">Technical</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="salary">Salário:</label>
+                            <select id="salary" name="salary">
+                                <option value="low">Baixo</option>
+                                <option value="medium">Médio</option>
+                                <option value="high">Alto</option>
+                            </select>
+                        </div>
+
+                        <div class="button-container">
+                            <button type="submit">Prever Satisfação</button>
+                        </div>
+                    </form>
+
+                    <h2 id="result"></h2>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -148,11 +223,10 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
-            integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-            crossorigin="anonymous"></script>
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="script.js"></script>
     <script src="cep.js"></script>
-    
+
 </body>
 
 </html>

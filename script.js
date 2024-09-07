@@ -398,3 +398,31 @@ document.getElementById('anterior-btn').addEventListener('click', () => {
 document.getElementById('proximo-btn').addEventListener('click', () => {
     carregarFuncionarios(currentPage + 1, 10, '', '', '');
 });
+
+document.getElementById('predictionForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const formData = new FormData(this);
+    const data = {};
+
+    formData.forEach((value, key) => {
+        data[key] = value;
+    });
+
+    fetch('http://127.0.0.1:8080/api/predict', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('result').innerText = `Predição de Satisfação: ${data.prediction}`;
+        //console.log(JSON.stringify(data));
+        //alert(`Predição de Satisfação: ${data.prediction}`)
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+});

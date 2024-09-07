@@ -12,3 +12,5 @@ COPY . /usr/share/nginx/html
 
 # Exponha a porta 80 para acesso externo
 EXPOSE 80
+
+#docker build --platform linux/amd64 -t angelozero/cadastro-funcionario-app .

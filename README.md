@@ -58,6 +58,9 @@ Imagens do sistema:
 - Edição de um funcionário:
     ![edit](./images/edit.png)
 
+- Predição de satisfação
+    ![predicao](./images/predicao.png)
+
 ## Serviços
 
 | DADO | Funcionalidade | Serviço | Detalhes |
@@ -68,4 +71,5 @@ Imagens do sistema:
 |Funcionario     |PUT         |/api/funcionario/{id}   | Atualiza um funcionário existente|
 |Funcionario     |GET         |/api/funcionarios       | Listando funcionários|
 |Departamento    |GET         |/api/departamentos      | Lista todos os departamentos|
-|CEP            |GET         |/viacep.com.br/ws/{CEP}/json/ | Consulta do cep|
+|CEP             |GET         |/viacep.com.br/ws/{CEP}/json/ | Consulta do cep|
+|Predição       |POST        |/api/predict            | Cálculo de predição | 
